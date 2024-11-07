@@ -3,7 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransferMate_TodoManager", "TransferMate_TodoManager\TransferMate_TodoManager.csproj", "{75A8D789-4074-4390-AF0B-2E4C0FE3B453}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TM_TodoManager.Api", "TransferMate_TodoManager\TM_TodoManager.Api.csproj", "{75A8D789-4074-4390-AF0B-2E4C0FE3B453}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{BA8F571F-67B7-4FF0-AEFB-0E4A09470677}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{D74EABBC-E6C2-4FC6-A000-D3E50C3D8C53}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{513DABD4-0AD2-4328-8C40-386F73C4CDB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TM_TodoManager.Application", "TransferMate_TodoManager.Application\TM_TodoManager.Application.csproj", "{E28BF827-9D6B-4F30-8E8C-08637A3D5BAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TM_TodoManager.UnitTests", "TransferMate_TodoManager.UnitTests\TM_TodoManager.UnitTests.csproj", "{A8F85506-E2B2-42D5-804F-CF4115FBC21F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TM_TodoManager.Infrastructure", "TM_TodoManager.Infrastructure\TM_TodoManager.Infrastructure.csproj", "{4485662A-B6D2-4E75-B4E5-BA02A72EC6ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TM_TodoManager.Core", "TM_TodoManager.Domain\TM_TodoManager.Core.csproj", "{0988D2DB-0FE9-43EA-B87E-CB894057DE38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +29,32 @@ Global
 		{75A8D789-4074-4390-AF0B-2E4C0FE3B453}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75A8D789-4074-4390-AF0B-2E4C0FE3B453}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75A8D789-4074-4390-AF0B-2E4C0FE3B453}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E28BF827-9D6B-4F30-8E8C-08637A3D5BAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E28BF827-9D6B-4F30-8E8C-08637A3D5BAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E28BF827-9D6B-4F30-8E8C-08637A3D5BAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E28BF827-9D6B-4F30-8E8C-08637A3D5BAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8F85506-E2B2-42D5-804F-CF4115FBC21F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8F85506-E2B2-42D5-804F-CF4115FBC21F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8F85506-E2B2-42D5-804F-CF4115FBC21F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8F85506-E2B2-42D5-804F-CF4115FBC21F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4485662A-B6D2-4E75-B4E5-BA02A72EC6ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4485662A-B6D2-4E75-B4E5-BA02A72EC6ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4485662A-B6D2-4E75-B4E5-BA02A72EC6ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4485662A-B6D2-4E75-B4E5-BA02A72EC6ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0988D2DB-0FE9-43EA-B87E-CB894057DE38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0988D2DB-0FE9-43EA-B87E-CB894057DE38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0988D2DB-0FE9-43EA-B87E-CB894057DE38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0988D2DB-0FE9-43EA-B87E-CB894057DE38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{75A8D789-4074-4390-AF0B-2E4C0FE3B453} = {BA8F571F-67B7-4FF0-AEFB-0E4A09470677}
+		{E28BF827-9D6B-4F30-8E8C-08637A3D5BAF} = {BA8F571F-67B7-4FF0-AEFB-0E4A09470677}
+		{A8F85506-E2B2-42D5-804F-CF4115FBC21F} = {513DABD4-0AD2-4328-8C40-386F73C4CDB2}
+		{4485662A-B6D2-4E75-B4E5-BA02A72EC6ED} = {BA8F571F-67B7-4FF0-AEFB-0E4A09470677}
+		{0988D2DB-0FE9-43EA-B87E-CB894057DE38} = {BA8F571F-67B7-4FF0-AEFB-0E4A09470677}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C4C68866-C018-473F-80A2-4D5319568179}
