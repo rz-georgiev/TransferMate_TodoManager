@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TM_TodoManager.Infrastructure\TM_TodoManager.Infrastructure.csproj" />
+    <ProjectReference Include="..\TM_TodoManager.Shared\TM_TodoManager.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

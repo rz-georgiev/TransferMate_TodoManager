@@ -1,6 +1,6 @@
 ﻿namespace TM_TodoManager.Domain.Entities
 {
-    public class Task
+    public class UserTask
     {
         public int Id { get; set; }
 

@@ -1,4 +1,6 @@
 
+using TM_TodoManager.Application;
+
 namespace TransferMate_TodoManager
 {
     public class Program
@@ -13,6 +15,7 @@ namespace TransferMate_TodoManager
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
 
             var app = builder.Build();
 
@@ -24,8 +27,17 @@ namespace TransferMate_TodoManager
             }
 
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
+
+            //app.MapPost("/createTask", async (Todo todo) =>
+            //{
+            //    db.Todos.Add(todo);
+            //    await db.SaveChangesAsync();
+
+            //    return Results.Ok()$"/todoitems/{todo.Id}", todo);
+            //});
+
+
 
             //var summaries = new[]
             //{
