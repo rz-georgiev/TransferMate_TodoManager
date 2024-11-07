@@ -9,8 +9,8 @@ namespace TM_TodoManager.Application.Interfaces
 
         Task<BaseResponse> UpdateTaskAsync(UpdateTaskDto dto);
 
-        Task<BaseResponse<ReadTaskDto>> GetPendingTasksAsync();
+        Task<BaseResponse<IEnumerable<ReadTaskDto>>> GetPendingTasksAsync();
 
-        Task<BaseResponse<ReadTaskDto>> GetOverdueTasksAsync();
+        Task<BaseResponse<IEnumerable<ReadTaskDto>>> GetOverdueTasksAsync();
     }
 }

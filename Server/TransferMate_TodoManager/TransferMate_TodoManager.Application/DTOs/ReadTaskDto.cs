@@ -1,4 +1,6 @@
-﻿namespace TM_TodoManager.Application.DTOs
+﻿using TM_TodoManager.Domain.Entities;
+
+namespace TM_TodoManager.Application.DTOs
 {
     public class ReadTaskDto
     {
@@ -9,5 +11,7 @@
         public DateTime? DueDate { get; set; }
 
         public int StatusId { get; set; }
+
+        public string StatusName { get; set; }
     }
 }

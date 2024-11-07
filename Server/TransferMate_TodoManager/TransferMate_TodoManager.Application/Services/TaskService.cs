@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using TM_TodoManager.Application.DTOs;
 using TM_TodoManager.Core.Enums;
 using TM_TodoManager.Domain.Entities;
@@ -23,39 +24,55 @@ namespace TM_TodoManager.Application.Interfaces
             var newTask = _mapper.Map<UserTask>(dto);
             newTask.StatusId = (int)StatusType.ToDo;
 
-            try
-            {
-                await _dbContext.Tasks.AddAsync(newTask);
-                await _dbContext.SaveChangesAsync();
+            await _dbContext.UserTasks.AddAsync(newTask);
+            await _dbContext.SaveChangesAsync();
 
-                return new BaseResponse
-                {
-                    IsOk = true
-                };
-            }
-            catch (Exception)
-            {
-                return new BaseResponse
-                {
-                    IsOk = false,
-                    Message = "An error occurred while adding new task to the system";
-                };
-            }
+            return new BaseResponse { IsOk = true };
         }
 
         public async Task<BaseResponse> UpdateTaskAsync(UpdateTaskDto dto)
         {
-            throw new NotImplementedException();
+            var task = await _dbContext.UserTasks.SingleOrDefaultAsync(x => x.Id == dto.Id);
+            if (task == null)
+                return new BaseResponse { IsOk = false, Message = "A task with the provided id does not exist" };
+
+            var updatedTask = _mapper.Map<Task>(dto);
+
+            _dbContext.UserTasks.Update(task);
+            await _dbContext.SaveChangesAsync();
+
+            return new BaseResponse { IsOk = true };
         }
 
-        public async Task<BaseResponse<ReadTaskDto>> GetOverdueTasksAsync()
+        public async Task<BaseResponse<IEnumerable<ReadTaskDto>>> GetPendingTasksAsync()
         {
-            throw new NotImplementedException();
+            var tasks = _dbContext.UserTasks.Where(x => x.DueDate < DateTime.UtcNow && x.StatusId != (int)StatusType.Done);
+            return await GetTasksSummaryAsync(tasks);
         }
 
-        public async Task<BaseResponse<ReadTaskDto>> GetPendingTasksAsync()
+        public async Task<BaseResponse<IEnumerable<ReadTaskDto>>> GetOverdueTasksAsync()
         {
-            throw new NotImplementedException();
+            var tasks = _dbContext.UserTasks.Where(x => x.DueDate >= DateTime.UtcNow && x.StatusId != (int)StatusType.Done);
+            return await GetTasksSummaryAsync(tasks);
+        }
+
+        private async Task<BaseResponse<IEnumerable<ReadTaskDto>>> GetTasksSummaryAsync(IQueryable<UserTask> tasks)
+        {
+            var result = await tasks.Select(x => new ReadTaskDto
+            {
+                Id = x.Id,
+                Name = x.Name,
+                DueDate = x.DueDate,
+                StatusId = x.StatusId,
+                StatusName = x.Status.Name
+            })
+            .ToListAsync();
+
+            return new BaseResponse<IEnumerable<ReadTaskDto>>
+            {
+                IsOk = true,
+                Result = result
+            };
         }
     }
 }

@@ -10,6 +10,9 @@ namespace TM_TodoManager.Application
             CreateMap<Task, NewTaskDto>();
             CreateMap<NewTaskDto, Task>();
 
+            CreateMap<Task, UpdateTaskDto>();
+            CreateMap<UpdateTaskDto, Task>();
+
         }
     }
 }

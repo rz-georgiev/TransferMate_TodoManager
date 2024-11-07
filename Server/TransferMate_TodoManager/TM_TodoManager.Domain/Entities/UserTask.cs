@@ -9,5 +9,7 @@
         public int StatusId { get; set; }
 
         public DateTime? DueDate { get; set; }
+
+        public Status Status { get; set; }
     }
 }
