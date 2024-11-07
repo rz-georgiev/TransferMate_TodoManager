@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TM_TodoManager.Api", "TM_TodoManager\TM_TodoManager.Api.csproj", "{75A8D789-4074-4390-AF0B-2E4C0FE3B453}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TM_TodoManager.Api", "TM_TodoManager.Api\TM_TodoManager.Api.csproj", "{75A8D789-4074-4390-AF0B-2E4C0FE3B453}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{BA8F571F-67B7-4FF0-AEFB-0E4A09470677}"
 EndProject
@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TM_TodoManager.UnitTests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TM_TodoManager.Infrastructure", "TM_TodoManager.Infrastructure\TM_TodoManager.Infrastructure.csproj", "{4485662A-B6D2-4E75-B4E5-BA02A72EC6ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TM_TodoManager.Core", "TM_TodoManager.Domain\TM_TodoManager.Core.csproj", "{0988D2DB-0FE9-43EA-B87E-CB894057DE38}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TM_TodoManager.Core", "TM_TodoManager.Core\TM_TodoManager.Core.csproj", "{0988D2DB-0FE9-43EA-B87E-CB894057DE38}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TM_TodoManager.Shared", "TM_TodoManager.Shared\TM_TodoManager.Shared.csproj", "{48AB2956-9BEA-4DB0-953E-4FF6EB6D65D9}"
 EndProject

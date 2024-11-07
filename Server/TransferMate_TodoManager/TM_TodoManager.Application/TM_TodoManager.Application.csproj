@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TM_TodoManager.Core\TM_TodoManager.Core.csproj" />
     <ProjectReference Include="..\TM_TodoManager.Infrastructure\TM_TodoManager.Infrastructure.csproj" />
     <ProjectReference Include="..\TM_TodoManager.Shared\TM_TodoManager.Shared.csproj" />
   </ItemGroup>
