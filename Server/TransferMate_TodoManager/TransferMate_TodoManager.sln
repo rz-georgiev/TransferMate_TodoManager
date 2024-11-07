@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TM_TodoManager.Api", "TransferMate_TodoManager\TM_TodoManager.Api.csproj", "{75A8D789-4074-4390-AF0B-2E4C0FE3B453}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TM_TodoManager.Api", "TM_TodoManager\TM_TodoManager.Api.csproj", "{75A8D789-4074-4390-AF0B-2E4C0FE3B453}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{BA8F571F-67B7-4FF0-AEFB-0E4A09470677}"
 EndProject
@@ -11,9 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{D74EABBC-E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{513DABD4-0AD2-4328-8C40-386F73C4CDB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TM_TodoManager.Application", "TransferMate_TodoManager.Application\TM_TodoManager.Application.csproj", "{E28BF827-9D6B-4F30-8E8C-08637A3D5BAF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TM_TodoManager.Application", "TM_TodoManager.Application\TM_TodoManager.Application.csproj", "{E28BF827-9D6B-4F30-8E8C-08637A3D5BAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TM_TodoManager.UnitTests", "TransferMate_TodoManager.UnitTests\TM_TodoManager.UnitTests.csproj", "{A8F85506-E2B2-42D5-804F-CF4115FBC21F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TM_TodoManager.UnitTests", "TM_TodoManager.UnitTests\TM_TodoManager.UnitTests.csproj", "{A8F85506-E2B2-42D5-804F-CF4115FBC21F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TM_TodoManager.Infrastructure", "TM_TodoManager.Infrastructure\TM_TodoManager.Infrastructure.csproj", "{4485662A-B6D2-4E75-B4E5-BA02A72EC6ED}"
 EndProject

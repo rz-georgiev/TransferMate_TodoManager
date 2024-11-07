@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TransferMate_TodoManager.Application\TM_TodoManager.Application.csproj" />
+    <ProjectReference Include="..\TM_TodoManager.Application\TM_TodoManager.Application.csproj" />
   </ItemGroup>
 
 </Project>
