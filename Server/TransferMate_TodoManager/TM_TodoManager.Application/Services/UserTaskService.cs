@@ -19,7 +19,7 @@ namespace TM_TodoManager.Application.Interfaces
             _mapper = mapper;
         }
 
-        public async Task<BaseResponse> CreateTaskAsync(NewTaskDto dto)
+        public async Task<BaseResponse<ReadTaskDto>> CreateTaskAsync(NewTaskDto dto)
         {
             var newTask = _mapper.Map<UserTask>(dto);
             newTask.StatusId = (int)StatusType.ToDo;
@@ -27,21 +27,22 @@ namespace TM_TodoManager.Application.Interfaces
             await _dbContext.UserTasks.AddAsync(newTask);
             await _dbContext.SaveChangesAsync();
 
-            return new BaseResponse { IsOk = true };
+            return new BaseResponse<ReadTaskDto> { IsOk = true };
         }
 
-        public async Task<BaseResponse> UpdateTaskAsync(UpdateTaskDto dto)
+        public async Task<BaseResponse<ReadTaskDto>> UpdateTaskAsync(UpdateTaskDto dto)
         {
             var task = await _dbContext.UserTasks.SingleOrDefaultAsync(x => x.Id == dto.Id);
             if (task == null)
-                return new BaseResponse { IsOk = false, Message = "A task with the provided id does not exist" };
-
-            var updatedTask = _mapper.Map<Task>(dto);
+                return new BaseResponse<ReadTaskDto> { IsOk = false, Message = "A task with the provided id does not exist" };
+            
+            var updatedTask = _mapper.Map<UserTask>(dto);
 
             _dbContext.UserTasks.Update(task);
             await _dbContext.SaveChangesAsync();
 
-            return new BaseResponse { IsOk = true };
+            var result = _mapper.Map<ReadTaskDto>(task);
+            return new BaseResponse<ReadTaskDto> { IsOk = true, Result = result };
         }
 
         public async Task<BaseResponse<IEnumerable<ReadTaskDto>>> GetPendingTasksAsync()
@@ -64,7 +65,7 @@ namespace TM_TodoManager.Application.Interfaces
                 Name = x.Name,
                 DueDate = x.DueDate,
                 StatusId = x.StatusId,
-                StatusName = x.Status.Name
+                StatusName = x.Status!.Name
             })
             .ToListAsync();
 

@@ -5,9 +5,9 @@ namespace TM_TodoManager.Application.Interfaces
 {
     public interface IUserTaskService
     {
-        Task<BaseResponse> CreateTaskAsync(NewTaskDto dto);
+        Task<BaseResponse<ReadTaskDto>> CreateTaskAsync(NewTaskDto dto);
 
-        Task<BaseResponse> UpdateTaskAsync(UpdateTaskDto dto);
+        Task<BaseResponse<ReadTaskDto>> UpdateTaskAsync(UpdateTaskDto dto);
 
         Task<BaseResponse<IEnumerable<ReadTaskDto>>> GetPendingTasksAsync();
 

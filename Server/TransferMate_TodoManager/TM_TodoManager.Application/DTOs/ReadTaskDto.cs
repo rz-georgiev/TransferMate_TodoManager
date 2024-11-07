@@ -4,12 +4,12 @@
     {
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
         public DateTime? DueDate { get; set; }
 
         public int StatusId { get; set; }
 
-        public string StatusName { get; set; }
+        public required string StatusName { get; set; }
     }
 }

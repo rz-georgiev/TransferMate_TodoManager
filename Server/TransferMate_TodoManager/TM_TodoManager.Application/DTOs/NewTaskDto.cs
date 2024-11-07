@@ -2,7 +2,7 @@
 {
     public class NewTaskDto
     {
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
         public DateTime? DueDate { get; set; }
     }

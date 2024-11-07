@@ -3,8 +3,8 @@
     public class BaseResponse
     {
         public bool IsOk { get; set; }
-
-        public string Message { get; set; }
+        
+        public string? Message { get; set; }
     }
 
     public class BaseResponse<TResult>

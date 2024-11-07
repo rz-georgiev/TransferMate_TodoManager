@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using TM_TodoManager.Application.DTOs;
+using TM_TodoManager.Core.Entities;
 
 namespace TM_TodoManager.Application
 {
@@ -7,11 +8,14 @@ namespace TM_TodoManager.Application
     {
         public MappingProfile()
         {
-            CreateMap<Task, NewTaskDto>();
-            CreateMap<NewTaskDto, Task>();
+            CreateMap<UserTask, NewTaskDto>();
+            CreateMap<NewTaskDto, UserTask>();
 
-            CreateMap<Task, UpdateTaskDto>();
-            CreateMap<UpdateTaskDto, Task>();
+            CreateMap<UserTask, UpdateTaskDto>();
+            CreateMap<UpdateTaskDto, UserTask>();
+            
+            CreateMap<UserTask, ReadTaskDto>();
+            CreateMap<ReadTaskDto, UserTask>();
 
         }
     }
