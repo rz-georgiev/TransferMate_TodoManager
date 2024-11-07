@@ -1,0 +1,6 @@
+@TransferMate_TodoManager_HostAddress = http://localhost:5178
+
+GET {{TransferMate_TodoManager_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
