@@ -1,12 +1,8 @@
 ﻿namespace TM_TodoManager.Application.DTOs
 {
-    public class UpdateTaskDto
+    public class UpdateTaskDto : BaseTaskDto
     {
         public int Id { get; set; }
-
-        public required string Name { get; set; }
-
-        public DateTime? DueDate { get; set; }
 
         public int StatusId { get; set; }
     }

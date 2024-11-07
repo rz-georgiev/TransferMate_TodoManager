@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { BaseResponse } from '../../../shared/models/baseResponse';
 import { ReadTaskDto } from '../models/readTaskDto';
 import { NewTaskDto } from '../models/newTaskDto';
+import { UpdateTaskDto } from '../models/updateTaskDto';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +13,14 @@ import { NewTaskDto } from '../models/newTaskDto';
 export class UserTaskService {
 
   private baseUrl = `${Urls.ApiUrl}`;
-  
-  constructor(private httpClient: HttpClient)  {  }
 
-  createTask(data: NewTaskDto): Observable<BaseResponse<ReadTaskDto>>{
+  constructor(private httpClient: HttpClient) { }
+
+  createTask(data: NewTaskDto): Observable<BaseResponse<ReadTaskDto>> {
     return this.httpClient.post<BaseResponse<ReadTaskDto>>(`${this.baseUrl}/createTask`, data);
   }
 
-  updateTask(data: NewTaskDto): Observable<BaseResponse<ReadTaskDto>>{
+  updateTask(data: UpdateTaskDto): Observable<BaseResponse<ReadTaskDto>> {
     return this.httpClient.post<BaseResponse<ReadTaskDto>>(`${this.baseUrl}/updateTask`, data);
   }
 

@@ -1,7 +1,4 @@
-export interface ReadTaskDto {
-    id: number;
+export interface NewTaskDto {
     name: number;
     dueDate: Date;
-    statusId: number;
-    statusName: string;
 }

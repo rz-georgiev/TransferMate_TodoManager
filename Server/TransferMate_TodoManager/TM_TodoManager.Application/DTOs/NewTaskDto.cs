@@ -1,9 +1,6 @@
 ﻿namespace TM_TodoManager.Application.DTOs
 {
-    public class NewTaskDto
+    public class NewTaskDto : BaseTaskDto
     {
-        public required string Name { get; set; }
-
-        public DateTime? DueDate { get; set; }
     }
 }

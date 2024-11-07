@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TM_TodoManager.Infrastructure;
 
@@ -11,9 +12,11 @@ using TM_TodoManager.Infrastructure;
 namespace TM_TodoManager.Infrastructure.Migrations
 {
     [DbContext(typeof(TransferMateDbContext))]
-    partial class TransferMateDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241107195920_AddingFieldsRequirements")]
+    partial class AddingFieldsRequirements
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

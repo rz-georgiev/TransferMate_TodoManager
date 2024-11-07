@@ -12,26 +12,32 @@ namespace TM_TodoManager.Application.Interfaces
     {
         private readonly TransferMateDbContext _dbContext;
         private readonly IMapper _mapper;
-
+        
         public UserTaskService(TransferMateDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;
         }
-
+        
         public async Task<BaseResponse<ReadTaskDto>> CreateTaskAsync(NewTaskDto dto)
-        {
+        {  
+            var validatedName = ValidateName(dto);
+            if (!validatedName.IsOk)  return validatedName;
+
             var newTask = _mapper.Map<UserTask>(dto);
             newTask.StatusId = (int)StatusType.ToDo;
 
             await _dbContext.UserTasks.AddAsync(newTask);
             await _dbContext.SaveChangesAsync();
-
+            
             return new BaseResponse<ReadTaskDto> { IsOk = true };
         }
 
         public async Task<BaseResponse<ReadTaskDto>> UpdateTaskAsync(UpdateTaskDto dto)
         {
+            var validatedName = ValidateName(dto);
+            if (!validatedName.IsOk) return validatedName;
+
             var task = await _dbContext.UserTasks.SingleOrDefaultAsync(x => x.Id == dto.Id);
             if (task == null)
                 return new BaseResponse<ReadTaskDto> { IsOk = false, Message = "A task with the provided id does not exist" };
@@ -74,6 +80,19 @@ namespace TM_TodoManager.Application.Interfaces
                 IsOk = true,
                 Result = result
             };
+        }
+
+        private BaseResponse<ReadTaskDto> ValidateName(BaseTaskDto baseTask)
+        {
+
+            if (baseTask.Name == null || baseTask.Name.Length < 1 || baseTask.Name.Length > 50)
+                return new BaseResponse<ReadTaskDto>
+                {
+                    IsOk = false,
+                    Message = "Specified name should be between 1 and 50 chars long"
+                };
+            
+            return new BaseResponse<ReadTaskDto>();
         }
     }
 }
