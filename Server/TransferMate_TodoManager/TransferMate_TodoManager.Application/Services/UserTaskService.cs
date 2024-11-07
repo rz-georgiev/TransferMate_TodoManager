@@ -4,16 +4,16 @@ using TM_TodoManager.Application.DTOs;
 using TM_TodoManager.Core.Enums;
 using TM_TodoManager.Domain.Entities;
 using TM_TodoManager.Infrastructure;
-using TM_TodoManager.Shared.Models.MotoDev.Common.Dtos;
+using TM_TodoManager.Shared.Models;
 
 namespace TM_TodoManager.Application.Interfaces
 {
-    public class TaskService : ITaskService
+    public class UserTaskService : IUserTaskService
     {
         private readonly TransferMateDbContext _dbContext;
         private readonly IMapper _mapper;
 
-        public TaskService(TransferMateDbContext dbContext, IMapper mapper)
+        public UserTaskService(TransferMateDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;

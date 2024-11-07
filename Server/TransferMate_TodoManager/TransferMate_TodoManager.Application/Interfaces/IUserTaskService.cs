@@ -1,9 +1,9 @@
 ﻿using TM_TodoManager.Application.DTOs;
-using TM_TodoManager.Shared.Models.MotoDev.Common.Dtos;
+using TM_TodoManager.Shared.Models;
 
 namespace TM_TodoManager.Application.Interfaces
 {
-    public interface ITaskService
+    public interface IUserTaskService
     {
         Task<BaseResponse> CreateTaskAsync(NewTaskDto dto);
 
