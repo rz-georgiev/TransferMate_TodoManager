@@ -1,4 +1,4 @@
-﻿namespace TM_TodoManager.Domain.Entities
+﻿namespace TM_TodoManager.Core.Entities
 {
     public class UserTask
     {

@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using TM_TodoManager.Application.DTOs;
+using TM_TodoManager.Core.Entities;
 using TM_TodoManager.Core.Enums;
-using TM_TodoManager.Domain.Entities;
 using TM_TodoManager.Infrastructure;
 using TM_TodoManager.Shared.Models;
 

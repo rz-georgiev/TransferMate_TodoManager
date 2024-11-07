@@ -1,6 +1,4 @@
-﻿using TM_TodoManager.Domain.Entities;
-
-namespace TM_TodoManager.Application.DTOs
+﻿namespace TM_TodoManager.Application.DTOs
 {
     public class ReadTaskDto
     {
