@@ -49,10 +49,6 @@ export class PendingTasksComponent {
     this.dataSource.sort = this.sort;
   }
 
-  editElement(element: ReadTaskDto) {
-    throw new Error('Method not implemented.');
-  }
-
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

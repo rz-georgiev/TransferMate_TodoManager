@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ReadTaskDto } from '../../models/readTaskDto';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { ReadStatusDto } from '../../models/readStatusDto';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { UserTaskService } from '../../services/user-tasks/user-task.service';
 import { StatusesService } from '../../services/statuses/statuses.service';
 import { BaseResponse } from '../../../../shared/models/baseResponse';
@@ -29,7 +29,7 @@ import { BaseResponse } from '../../../../shared/models/baseResponse';
     MatSelect,
     MatOption,
     MatDatepickerModule,
-    ],
+  ],
   templateUrl: './task-editor.component.html',
   styleUrl: './task-editor.component.css'
 })
@@ -38,12 +38,19 @@ export class TaskEditorComponent {
   public editForm!: FormGroup;
   public data!: ReadTaskDto;
   public statuses!: ReadStatusDto[];
+  public isInEditMode!: boolean;
 
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute,
     private taskService: UserTaskService,
     private statusesService: StatusesService
-  ) { }
+  ) {
+    this.editForm = this.fb.group({
+      name: ['', [Validators.required, Validators.maxLength(50)]],
+      dueDate: ['', []],
+      statusId: ['', [Validators.required]],
+    });
+  }
 
   ngOnInit() {
 
@@ -52,20 +59,22 @@ export class TaskEditorComponent {
         this.data = JSON.parse(params['data']);
       }
     });
+
+    this.isInEditMode = this.data?.id > 0;
+
+    this.editForm.patchValue({
+      name: this.data.name,
+      dueDate: this.data.dueDate,
+    });
     
     this.statusesService.getAll().subscribe(x => {
       this.statuses = x.result;
-    });
 
-    this.editForm = this.fb.group({
-      name: ['', [Validators.required, Validators.maxLength(50)]],
-      dueDate: ['', []],
-      statusId: ['', [Validators.required]],
-    });
-
-    this.editForm.patchValue({ 
-      name: this.data.name,
-      dueDate: this.data.dueDate,
+      if (this.data?.id > 0) {
+        this.editForm.patchValue({
+          statusId: this.data.statusId,
+        });
+      }
     });
   }
 
