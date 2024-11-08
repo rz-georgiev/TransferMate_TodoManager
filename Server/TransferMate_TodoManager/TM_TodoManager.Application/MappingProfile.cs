@@ -17,6 +17,9 @@ namespace TM_TodoManager.Application
             CreateMap<UserTask, ReadTaskDto>();
             CreateMap<ReadTaskDto, UserTask>();
 
+            CreateMap<Status, ReadStatusDto>();
+            CreateMap<ReadStatusDto, Status>();
+
         }
     }
 }

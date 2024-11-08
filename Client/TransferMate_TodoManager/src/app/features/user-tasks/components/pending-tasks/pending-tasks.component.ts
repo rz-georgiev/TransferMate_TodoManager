@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ReadTaskDto } from '../../models/readTaskDto';
-import { UserTaskService } from '../../services/user-task.service';
+import { UserTaskService } from '../../services/user-tasks/user-task.service';
 import { OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -33,7 +33,6 @@ import {MatButtonModule} from '@angular/material/button';
 })
 export class PendingTasksComponent {
 
-
   displayedColumns: string[] = ['id', 'name', 'dueDate', 'statusName', 'edit'];
   dataSource = new MatTableDataSource<ReadTaskDto>();
 
@@ -43,9 +42,11 @@ export class PendingTasksComponent {
   constructor(private service: UserTaskService) { }
 
   ngOnInit() {
-    this.service.getOverdueTasks().subscribe(x => {
+    this.service.getPendingTasks().subscribe(x => {
       this.dataSource.data = x.result;
     });
+
+    this.dataSource.sort = this.sort;
   }
 
   editElement(element: ReadTaskDto) {
@@ -56,4 +57,9 @@ export class PendingTasksComponent {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  edit(task: ReadTaskDto) {
+    throw new Error('Method not implemented.');
+    }
+    
 }

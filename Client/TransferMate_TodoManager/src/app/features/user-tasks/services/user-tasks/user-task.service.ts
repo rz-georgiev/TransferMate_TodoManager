@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Urls } from '../../../shared/consts/urls';
+import { Urls } from '../../../../shared/consts/urls';
 import { Observable } from 'rxjs';
-import { BaseResponse } from '../../../shared/models/baseResponse';
-import { ReadTaskDto } from '../models/readTaskDto';
-import { NewTaskDto } from '../models/newTaskDto';
-import { UpdateTaskDto } from '../models/updateTaskDto';
+import { BaseResponse } from '../../../../shared/models/baseResponse';
+import { ReadTaskDto } from '../../models/readTaskDto';
+import { NewTaskDto } from '../../models/newTaskDto';
+import { UpdateTaskDto } from '../../models/updateTaskDto';
 
 @Injectable({
   providedIn: 'root'

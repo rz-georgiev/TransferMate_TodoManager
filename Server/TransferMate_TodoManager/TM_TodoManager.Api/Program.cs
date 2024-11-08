@@ -33,6 +33,7 @@ namespace TransferMate_TodoManager
             );
 
             builder.Services.AddTransient<IUserTaskService, UserTaskService>();
+            builder.Services.AddTransient<IStatusService, StatusService>();
 
             var app = builder.Build();
 
@@ -70,6 +71,12 @@ namespace TransferMate_TodoManager
                 return result.IsOk ? Results.Ok(result) : Results.BadRequest(result);
             });
 
+            app.MapGet("/statuses", async (IStatusService service) =>
+            {
+                var result = await service.GetAll();
+                return result.IsOk ? Results.Ok(result) : Results.BadRequest(result);
+            });
+            
             app.Run();
         }
     }
