@@ -20,7 +20,7 @@ namespace TransferMate_TodoManager
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddAutoMapper(typeof(MappingProfile));
-
+            
             var connectionString = builder.Configuration.GetConnectionString("TransferMate");
             var serverVersion = new MySqlServerVersion(ServerVersion.AutoDetect(connectionString));
 

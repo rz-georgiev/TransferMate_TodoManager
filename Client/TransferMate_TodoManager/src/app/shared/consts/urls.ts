@@ -1,3 +1,3 @@
 export abstract class Urls {
-    static readonly ApiUrl: string = 'https://localhost:5178';
+    static readonly ApiUrl: string = 'http://localhost:5178';
 }
