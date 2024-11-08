@@ -1,1 +1,41 @@
-<p>task-editor works!</p>
+<div class="form-container">
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" />
+        <mat-error *ngIf="editForm.get('name')!.hasError('required')">
+          Name is required.
+        </mat-error>
+        <mat-error *ngIf="editForm.get('name')!.hasError('maxlength')">
+            Name must be at max 30 characters long.
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Due Date</mat-label>
+        <input matInput formControlName="dueDate" />
+        <mat-error *ngIf="editForm.get('dueDate')!.hasError('required')">
+            Due Date is required.
+        </mat-error>
+        <mat-error *ngIf="editForm.get('dueDate')!.hasError('minlength')">
+            Due Date must be at least 3 characters long.
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Status</mat-label>
+        <input matInput formControlName="statusId" />
+        <mat-error *ngIf="editForm.get('statusId')!.hasError('required')">
+            Status is required.
+        </mat-error>
+        <mat-error *ngIf="editForm.get('statusId')!.hasError('statusId')">
+          Please enter a valid Status.
+        </mat-error>
+      </mat-form-field>
+  
+      <div class="button-group">
+        <button mat-raised-button color="primary" type="submit" [disabled]="editForm.invalid">Submit</button>
+        <button mat-button type="button" (click)="onReikset()">Reset</button>
+      </div>
+    </form>
+</div>

@@ -9,7 +9,9 @@ import { MatFormField, MatFormFieldControl, MatFormFieldModule, MatLabel } from 
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-
+import { RouterLink, RouterModule } from '@angular/router';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'app-pending-tasks',
@@ -22,13 +24,17 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    RouterLink,
+    MatButtonModule,
+    RouterModule
     ],
   templateUrl: './pending-tasks.component.html',
   styleUrl: './pending-tasks.component.css'
 })
 export class PendingTasksComponent {
 
-  displayedColumns: string[] = ['id', 'name', 'dueDate', 'statusName'];
+
+  displayedColumns: string[] = ['id', 'name', 'dueDate', 'statusName', 'edit'];
   dataSource = new MatTableDataSource<ReadTaskDto>();
 
   @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;
@@ -40,6 +46,10 @@ export class PendingTasksComponent {
     this.service.getOverdueTasks().subscribe(x => {
       this.dataSource.data = x.result;
     });
+  }
+
+  editElement(element: ReadTaskDto) {
+    throw new Error('Method not implemented.');
   }
 
   applyFilter(event: Event) {
