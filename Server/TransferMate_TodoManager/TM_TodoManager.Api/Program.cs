@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 using TM_TodoManager.Application;
 using TM_TodoManager.Application.DTOs;
 using TM_TodoManager.Application.Interfaces;
@@ -22,6 +23,8 @@ namespace TransferMate_TodoManager
             builder.Services.AddAutoMapper(typeof(MappingProfile));
             
             var connectionString = builder.Configuration.GetConnectionString("TransferMate");
+            Console.WriteLine($"Asdas -> {connectionString}");
+            Debug.WriteLine($"Asdas -> {connectionString}");
             var serverVersion = new MySqlServerVersion(ServerVersion.AutoDetect(connectionString));
 
             builder.Services.AddDbContext<TransferMateDbContext>(
@@ -40,9 +43,11 @@ namespace TransferMate_TodoManager
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
+                
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseHttpsRedirection();
             app.UseAuthorization();
