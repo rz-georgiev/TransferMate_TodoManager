@@ -6,8 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-import e, { Router } from 'express';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route } from '@angular/router';
 import { ReadTaskDto } from '../../models/readTaskDto';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { ReadStatusDto } from '../../models/readStatusDto';
@@ -15,6 +14,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { UserTaskService } from '../../services/user-tasks/user-task.service';
 import { StatusesService } from '../../services/statuses/statuses.service';
 import { BaseResponse } from '../../../../shared/models/baseResponse';
+import { MatNativeDateModule } from '@angular/material/core';
+import { NewTaskDto } from '../../models/newTaskDto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-task-editor',
@@ -29,6 +31,7 @@ import { BaseResponse } from '../../../../shared/models/baseResponse';
     MatSelect,
     MatOption,
     MatDatepickerModule,
+    MatNativeDateModule 
   ],
   templateUrl: './task-editor.component.html',
   styleUrl: './task-editor.component.css'
@@ -42,13 +45,14 @@ export class TaskEditorComponent {
 
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute,
+    private router: Router,
     private taskService: UserTaskService,
     private statusesService: StatusesService
   ) {
     this.editForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(50)]],
       dueDate: ['', []],
-      statusId: ['', [Validators.required]],
+      statusId: ['', []],
     });
   }
 
@@ -60,28 +64,39 @@ export class TaskEditorComponent {
       }
     });
 
-    this.isInEditMode = this.data?.id > 0;
-
-    this.editForm.patchValue({
-      name: this.data.name,
-      dueDate: this.data.dueDate,
-    });
-    
-    this.statusesService.getAll().subscribe(x => {
+  this.statusesService.getAll().subscribe(x => {
       this.statuses = x.result;
+  });
 
-      if (this.data?.id > 0) {
-        this.editForm.patchValue({
-          statusId: this.data.statusId,
-        });
-      }
-    });
+    // this.isInEditMode = this.data?.id > 0;
+    // if (this.data?.id > 0) {
+      
+    // }
+    // this.editForm.patchValue({
+    //   name: this.data.name,
+    //   dueDate: this.data.dueDate,
+    // });
+    
+    // this.statusesService.getAll().subscribe(x => {
+    //   this.statuses = x.result;
+
+    //   if (this.data?.id > 0) {
+    //     this.editForm.patchValue({
+    //       statusId: this.data.statusId,
+    //     });
+    //   }
+    // });
   }
 
-  onSubmit(): void {
-    if (this.editForm.valid) {
-      console.log('Form submitted:', this.editForm.value);
-    }
+  onSubmit() {
+        this.taskService.createTask({
+          name: this.editForm.value.name,
+          dueDate: this.editForm.value.dueDate
+        }).subscribe(x => {
+          if (x.isOk) {
+            this.router.navigate(['/pending-tasks']);
+          }
+        });
   }
 
 }

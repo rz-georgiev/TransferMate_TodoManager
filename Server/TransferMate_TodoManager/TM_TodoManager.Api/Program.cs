@@ -6,6 +6,8 @@ using TM_TodoManager.Application.DTOs;
 using TM_TodoManager.Application.Interfaces;
 using TM_TodoManager.Infrastructure;
 using TM_TodoManager.Shared.Models;
+using Microsoft.AspNetCore.Cors.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace TransferMate_TodoManager
 {
@@ -15,21 +17,15 @@ namespace TransferMate_TodoManager
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            builder.Services.AddAuthorization();
-
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddAutoMapper(typeof(MappingProfile));
 
             var connectionString = builder.Configuration.GetConnectionString("TransferMate");
-            Debug.WriteLine($"Asdas -> {connectionString}");
-            Console.WriteLine($"Asdas2 -> {connectionString}");
             try
             {
                 var serverVersion = new MySqlServerVersion(ServerVersion.AutoDetect(connectionString));
-                Console.WriteLine($"Asdas3 -> {serverVersion.ToString()}");
                 builder.Services.AddDbContext<TransferMateDbContext>(
               dbContextOptions => dbContextOptions
                   .UseMySql(connectionString, serverVersion)
@@ -45,8 +41,25 @@ namespace TransferMate_TodoManager
             builder.Services.AddTransient<IUserTaskService, UserTaskService>();
             builder.Services.AddTransient<IStatusService, StatusService>();
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: "MyAllowAllHeadersPolicy",
+                    policy =>
+                    {
+                        policy.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                    });
+            });
+
             var app = builder.Build();
 
+
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+            
             using (var Scope = app.Services.CreateScope())
             {
                 var context = Scope.ServiceProvider.GetRequiredService<TransferMateDbContext>();
@@ -60,7 +73,6 @@ namespace TransferMate_TodoManager
             app.UseSwaggerUI();
 
             app.UseHttpsRedirection();
-            app.UseAuthorization();
 
             app.MapPost("/createTask", async (NewTaskDto dto, IUserTaskService service) =>
             {

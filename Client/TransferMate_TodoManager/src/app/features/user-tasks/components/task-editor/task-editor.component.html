@@ -1,43 +1,57 @@
-<div class="form-container">
-    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Name</mat-label>
-        <input matInput formControlName="name" />
-        <mat-error *ngIf="editForm.get('name')!.hasError('required')">
-          Name is required.
-        </mat-error>
-        <mat-error *ngIf="editForm.get('name')!.hasError('maxlength')">
-            Name must be at max 30 characters long.
-        </mat-error>
-      </mat-form-field>
-  
-      <mat-form-field appearance="fill" class="full-width">
-        <input matInput formControlName="dueDate" />
-        <mat-error *ngIf="editForm.get('dueDate')!.hasError('required')">
-            Due Date is required.
-        </mat-error>
-        <mat-error *ngIf="editForm.get('dueDate')!.hasError('minlength')">
-            Due Date must be at least 3 characters long.
-        </mat-error>
-      </mat-form-field>
-  
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Status</mat-label>
-        <mat-select formControlName="statusId">
-          @for (status of statuses; track status) {
-            <mat-option [value]="status.id">{{status.name}}</mat-option>
+<!-- Education-->
+<section class="resume-section" id="education">
+  <div class="resume-section-content">
+    <h2 class="mb-5">Task Editor</h2>
+    <div class="mat-elevation-z8">
+
+      <div class="form-container">
+        <form [formGroup]="editForm" (submit)="onSubmit()">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" />
+            <mat-error *ngIf="editForm.get('name')!.hasError('required')">
+              Name is required.
+            </mat-error>
+            <mat-error *ngIf="editForm.get('name')!.hasError('maxlength')">
+              Name must be at max 30 characters long.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Due Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dueDate" >
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="editForm.get('dueDate')!.hasError('required')">
+              Due Date is required.
+            </mat-error>
+            <mat-error *ngIf="editForm.get('dueDate')!.hasError('minlength')">
+              Due Date must be at least 3 characters long.
+            </mat-error>
+          </mat-form-field>
+
+          @if (this.data) {
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="statusId">
+              @for (status of statuses; track status) {
+              <mat-option [value]="status.id">{{status.name}}</mat-option>
+              }
+            </mat-select>
+            <mat-error *ngIf="editForm.get('statusId')!.hasError('required')">
+              Status is required.
+            </mat-error>
+            <mat-error *ngIf="editForm.get('statusId')!.hasError('statusId')">
+              Please enter a valid Status.
+            </mat-error>
+          </mat-form-field>
           }
-        </mat-select>
-        <mat-error *ngIf="editForm.get('statusId')!.hasError('required')">
-            Status is required.
-        </mat-error>
-        <mat-error *ngIf="editForm.get('statusId')!.hasError('statusId')">
-          Please enter a valid Status.
-        </mat-error>
-      </mat-form-field>
-  
-      <div class="button-group">
-        <button mat-raised-button color="primary" type="submit" [disabled]="editForm.invalid">Save</button>
+          <div class="button-group">
+            <button mat-raised-button color="primary" type="submit"
+              [disabled]="editForm.invalid">Save</button>
+          </div>
+        </form>
       </div>
-    </form>
-</div>
+    </div>
+  </div>
+</section>
