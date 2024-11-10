@@ -18,13 +18,13 @@ namespace TM_TodoManager.Infrastructure
                 new Status { Id = 2, Name = "InProgress" },
                 new Status { Id = 3, Name = "Done" }
             );
-
+            
             modelBuilder.Entity<UserTask>().HasData(
-                new UserTask { Id = 1, Name = "Task1", DueDate = DateTime.UtcNow.AddDays(1), StatusId = 1 },
-                new UserTask { Id = 2, Name = "Task2", DueDate = DateTime.UtcNow.AddDays(2), StatusId = 1 },
-                new UserTask { Id = 3, Name = "Task3", DueDate = DateTime.UtcNow.AddDays(-1), StatusId = 2 },
-                new UserTask { Id = 4, Name = "Task4", DueDate = DateTime.UtcNow.AddDays(-2), StatusId = 2 },
-                new UserTask { Id = 5, Name = "Task5", DueDate = DateTime.UtcNow.AddDays(-3), StatusId = 2 }
+                new UserTask { Id = 1, Name = "Task1", DueDate = DateTime.UtcNow.AddDays(1), CreatedDateTime = DateTime.UtcNow.AddDays(2),  StatusId = 1 },
+                new UserTask { Id = 2, Name = "Task2", DueDate = DateTime.UtcNow.AddDays(2), CreatedDateTime = DateTime.UtcNow.AddDays(3), StatusId = 1 },
+                new UserTask { Id = 3, Name = "Task3", DueDate = DateTime.UtcNow.AddDays(-1), CreatedDateTime = DateTime.UtcNow.AddDays(4), StatusId = 2 },
+                new UserTask { Id = 4, Name = "Task4", DueDate = DateTime.UtcNow.AddDays(-2), CreatedDateTime = DateTime.UtcNow.AddDays(-5), StatusId = 2 },
+                new UserTask { Id = 5, Name = "Task5", DueDate = DateTime.UtcNow.AddDays(-3), CreatedDateTime = DateTime.UtcNow.AddDays(-6), StatusId = 2 }
             );
         }
     }

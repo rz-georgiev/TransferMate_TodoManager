@@ -17,6 +17,7 @@ import { BaseResponse } from '../../../../shared/models/baseResponse';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NewTaskDto } from '../../models/newTaskDto';
 import { Router } from '@angular/router';
+import { BaseTasksComponent } from "../base-tasks/base-tasks.component";
 
 @Component({
   selector: 'app-task-editor',
@@ -31,17 +32,19 @@ import { Router } from '@angular/router';
     MatSelect,
     MatOption,
     MatDatepickerModule,
-    MatNativeDateModule
-  ],
+    MatNativeDateModule,
+    BaseTasksComponent
+],
   templateUrl: './task-editor.component.html',
   styleUrl: './task-editor.component.css'
 })
 export class TaskEditorComponent {
 
   public editForm!: FormGroup;
-  public data!: ReadTaskDto;
+  public data!: any;
   public statuses!: ReadStatusDto[];
   public isInEditMode!: boolean;
+  private isPendingTasks!: boolean;
 
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -61,6 +64,9 @@ export class TaskEditorComponent {
     this.route.queryParams.subscribe(params => {
       if (params['data']) {
         this.data = JSON.parse(params['data']);
+      }
+      if (params['isPendingTasks']) {
+        this.isPendingTasks = JSON.parse(params['isPendingTasks']);
       }
     });
 
@@ -82,21 +88,33 @@ export class TaskEditorComponent {
       this.taskService.updateTask({
         id: this.data.id,
         name: this.editForm.value.name,
-        dueDate: this.editForm.value.dueDate,
+        dueDate: this.editForm.value.dueDate === '' 
+            ? null
+            : this.editForm.value.dueDate,
         statusId: this.editForm.value.statusId,
       }).subscribe(x => {
         if (x.isOk) {
-          this.router.navigate(['/pending-tasks']);
+          if (this.isPendingTasks){
+            this.router.navigate(['/pending-tasks']);
+          } else {
+            this.router.navigate(['/overdue-tasks']);
+          }
         }
       });
     }
     else {
       this.taskService.createTask({
         name: this.editForm.value.name,
-        dueDate: this.editForm.value.dueDate
+        dueDate: this.editForm.value.dueDate === '' 
+           ? null
+           : this.editForm.value.dueDate
       }).subscribe(x => {
         if (x.isOk) {
-          this.router.navigate(['/pending-tasks']);
+          if (this.isPendingTasks){
+            this.router.navigate(['/pending-tasks']);
+          } else {
+            this.router.navigate(['/overdue-tasks']);
+          }
         }
       });
     }

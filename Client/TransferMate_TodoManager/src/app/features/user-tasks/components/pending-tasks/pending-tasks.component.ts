@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { RouterLink, RouterModule } from '@angular/router';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
+import { BaseTasksComponent } from "../base-tasks/base-tasks.component";
 
 @Component({
   selector: 'app-pending-tasks',
@@ -26,8 +27,9 @@ import {MatButtonModule} from '@angular/material/button';
     MatIconModule,
     RouterLink,
     MatButtonModule,
-    RouterModule
-    ],
+    RouterModule,
+    BaseTasksComponent
+],
   templateUrl: './pending-tasks.component.html',
   styleUrl: './pending-tasks.component.css'
 })
@@ -47,6 +49,7 @@ export class PendingTasksComponent {
     });
 
     this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   applyFilter(event: Event) {
@@ -54,8 +57,4 @@ export class PendingTasksComponent {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  edit(task: ReadTaskDto) {
-    throw new Error('Method not implemented.');
-    }
-    
 }

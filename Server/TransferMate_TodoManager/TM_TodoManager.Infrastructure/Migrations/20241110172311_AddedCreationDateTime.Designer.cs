@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TM_TodoManager.Infrastructure;
 
@@ -11,9 +12,11 @@ using TM_TodoManager.Infrastructure;
 namespace TM_TodoManager.Infrastructure.Migrations
 {
     [DbContext(typeof(TransferMateDbContext))]
-    partial class TransferMateDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241110172311_AddedCreationDateTime")]
+    partial class AddedCreationDateTime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,40 +92,40 @@ namespace TM_TodoManager.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDateTime = new DateTime(2024, 11, 12, 17, 25, 34, 408, DateTimeKind.Utc).AddTicks(7366),
-                            DueDate = new DateTime(2024, 11, 11, 17, 25, 34, 408, DateTimeKind.Utc).AddTicks(7357),
+                            CreatedDateTime = new DateTime(2024, 11, 8, 17, 23, 10, 332, DateTimeKind.Utc).AddTicks(7356),
+                            DueDate = new DateTime(2024, 11, 11, 17, 23, 10, 332, DateTimeKind.Utc).AddTicks(7347),
                             Name = "Task1",
                             StatusId = 1
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDateTime = new DateTime(2024, 11, 13, 17, 25, 34, 408, DateTimeKind.Utc).AddTicks(7368),
-                            DueDate = new DateTime(2024, 11, 12, 17, 25, 34, 408, DateTimeKind.Utc).AddTicks(7368),
+                            CreatedDateTime = new DateTime(2024, 11, 7, 17, 23, 10, 332, DateTimeKind.Utc).AddTicks(7361),
+                            DueDate = new DateTime(2024, 11, 12, 17, 23, 10, 332, DateTimeKind.Utc).AddTicks(7360),
                             Name = "Task2",
                             StatusId = 1
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDateTime = new DateTime(2024, 11, 14, 17, 25, 34, 408, DateTimeKind.Utc).AddTicks(7370),
-                            DueDate = new DateTime(2024, 11, 9, 17, 25, 34, 408, DateTimeKind.Utc).AddTicks(7370),
+                            CreatedDateTime = new DateTime(2024, 11, 6, 17, 23, 10, 332, DateTimeKind.Utc).AddTicks(7363),
+                            DueDate = new DateTime(2024, 11, 9, 17, 23, 10, 332, DateTimeKind.Utc).AddTicks(7362),
                             Name = "Task3",
                             StatusId = 2
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDateTime = new DateTime(2024, 11, 5, 17, 25, 34, 408, DateTimeKind.Utc).AddTicks(7372),
-                            DueDate = new DateTime(2024, 11, 8, 17, 25, 34, 408, DateTimeKind.Utc).AddTicks(7372),
+                            CreatedDateTime = new DateTime(2024, 11, 15, 17, 23, 10, 332, DateTimeKind.Utc).AddTicks(7366),
+                            DueDate = new DateTime(2024, 11, 8, 17, 23, 10, 332, DateTimeKind.Utc).AddTicks(7365),
                             Name = "Task4",
                             StatusId = 2
                         },
                         new
                         {
                             Id = 5,
-                            CreatedDateTime = new DateTime(2024, 11, 4, 17, 25, 34, 408, DateTimeKind.Utc).AddTicks(7374),
-                            DueDate = new DateTime(2024, 11, 7, 17, 25, 34, 408, DateTimeKind.Utc).AddTicks(7373),
+                            CreatedDateTime = new DateTime(2024, 11, 16, 17, 23, 10, 332, DateTimeKind.Utc).AddTicks(7368),
+                            DueDate = new DateTime(2024, 11, 7, 17, 23, 10, 332, DateTimeKind.Utc).AddTicks(7367),
                             Name = "Task5",
                             StatusId = 2
                         });

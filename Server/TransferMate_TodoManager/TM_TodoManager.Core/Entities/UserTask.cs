@@ -16,6 +16,8 @@ namespace TM_TodoManager.Core.Entities
 
         public DateTime? DueDate { get; set; }
 
+        public DateTime CreatedDateTime { get; set; }
+
         [Required]
         public Status? Status { get; set; }
     }

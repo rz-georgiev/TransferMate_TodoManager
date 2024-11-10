@@ -26,6 +26,8 @@ namespace TM_TodoManager.Application.Interfaces
             if (!validatedName.IsOk) return validatedName;
 
             var newTask = _mapper.Map<UserTask>(dto);
+            
+            newTask.CreatedDateTime = DateTime.UtcNow;
             newTask.StatusId = (int)StatusType.ToDo;
 
             await _dbContext.UserTasks.AddAsync(newTask);
@@ -65,13 +67,13 @@ namespace TM_TodoManager.Application.Interfaces
 
         public async Task<BaseResponse<IEnumerable<ReadTaskDto>>> GetPendingTasksAsync()
         {
-            var tasks = _dbContext.UserTasks.Where(x => x.DueDate < DateTime.UtcNow && x.StatusId != (int)StatusType.Done);
+            var tasks = _dbContext.UserTasks.Where(x => x.DueDate < x.CreatedDateTime && x.StatusId != (int)StatusType.Done);
             return await GetTasksSummaryAsync(tasks);
         }
 
         public async Task<BaseResponse<IEnumerable<ReadTaskDto>>> GetOverdueTasksAsync()
         {
-            var tasks = _dbContext.UserTasks.Where(x => x.DueDate >= DateTime.UtcNow && x.StatusId != (int)StatusType.Done);
+            var tasks = _dbContext.UserTasks.Where(x => x.DueDate >= x.CreatedDateTime && x.StatusId != (int)StatusType.Done);
             return await GetTasksSummaryAsync(tasks);
         }
 
