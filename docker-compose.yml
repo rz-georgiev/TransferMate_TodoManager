@@ -1,0 +1,40 @@
+services:
+  mysql:
+    image: mysql:9.1.0
+    environment:
+      MYSQL_ROOT_PASSWORD: TransferMate1
+      MYSQL_DATABASE: tm_todo_manager
+    container_name: mysql-server
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+
+  api:
+    build:
+      context: ./Server/TransferMate_TodoManager/
+      dockerfile: Dockerfile
+    container_name: dotnet-api
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: Server=mysql-container;Database=tm_todo_manager;User=root;Password=TransferMate1;
+    ports: 
+      - "5000:80"
+    depends_on:
+      - mysql
+      
+  angular:
+    build: 
+      context: ./Client/TransferMate_TodoManager/
+      dockerfile: Dockerfile
+    container_name: angular-app
+    ports:
+      - "4200:80"
+    depends_on:
+      - api
+
+volumes:
+  mysql-data:
+
+
