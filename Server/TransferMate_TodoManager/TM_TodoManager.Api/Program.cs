@@ -17,6 +17,12 @@ namespace TransferMate_TodoManager
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.WebHost.ConfigureKestrel(serverOptions =>
+            {
+                serverOptions.ListenAnyIP(80);
+            });
+
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -25,6 +31,19 @@ namespace TransferMate_TodoManager
 
             ///Configuring database connection
             var connectionString = builder.Configuration.GetConnectionString("TransferMate");
+
+            if (builder.Configuration["DBHOST"] != null)
+            {
+                var host = builder.Configuration["DBHOST"];
+                var port = builder.Configuration["DBPORT"];
+                var password = builder.Configuration["MYSQL_PASSWORD"];
+                var userid = builder.Configuration["MYSQL_USER"];
+                var database = builder.Configuration["MYSQL_DATABASE"];
+
+                connectionString = $"Server={host};Port={port};Database={database};User={userid};Password={password}";
+            }
+
+            Console.WriteLine(connectionString);
             try
             {
                 var serverVersion = new MySqlServerVersion(ServerVersion.AutoDetect(connectionString));
