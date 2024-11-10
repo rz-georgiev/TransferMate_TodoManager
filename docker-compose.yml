@@ -6,7 +6,8 @@ services:
       MYSQL_DATABASE: tm_todo_manager
     container_name: mysql-server
     ports:
-      - "3306:3306"
+      - "3307:3306"
+    restart: unless-stopped
     volumes:
       - mysql-data:/var/lib/mysql
 
@@ -18,9 +19,10 @@ services:
     container_name: dotnet-api
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      ConnectionStrings__TransferMate: Server=172.18.0.1;Port=3306;Database=tm_todo_manager;User=root;Password=TransferMate1;
+      ConnectionStrings__TransferMate: Server=172.18.0.1;Port=3307;Database=tm_todo_manager;User=root;Password=TransferMate1;
     ports: 
       - 8082:80
+    restart: unless-stopped
     depends_on:
       - mysql
       
@@ -31,6 +33,7 @@ services:
     container_name: angular-app
     ports:
       - "4200:80"
+    restart: unless-stopped
     depends_on:
       - api
 
