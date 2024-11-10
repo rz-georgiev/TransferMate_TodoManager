@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Diagnostics;
 using TM_TodoManager.Application;
 using TM_TodoManager.Application.DTOs;
@@ -21,30 +22,39 @@ namespace TransferMate_TodoManager
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddAutoMapper(typeof(MappingProfile));
-            
-            var connectionString = builder.Configuration.GetConnectionString("TransferMate");
-            Console.WriteLine($"Asdas -> {connectionString}");
-            Debug.WriteLine($"Asdas -> {connectionString}");
-            var serverVersion = new MySqlServerVersion(ServerVersion.AutoDetect(connectionString));
 
-            builder.Services.AddDbContext<TransferMateDbContext>(
-                dbContextOptions => dbContextOptions
-                    .UseMySql(connectionString, serverVersion)
-                    .LogTo(Console.WriteLine, LogLevel.Information)
-                    .EnableSensitiveDataLogging()
-                    .EnableDetailedErrors()
-            );
+            var connectionString = builder.Configuration.GetConnectionString("TransferMate");
+            Debug.WriteLine($"Asdas -> {connectionString}");
+            Console.WriteLine($"Asdas2 -> {connectionString}");
+            try
+            {
+                var serverVersion = new MySqlServerVersion(ServerVersion.AutoDetect(connectionString));
+                Console.WriteLine($"Asdas3 -> {serverVersion.ToString()}");
+                builder.Services.AddDbContext<TransferMateDbContext>(
+              dbContextOptions => dbContextOptions
+                  .UseMySql(connectionString, serverVersion)
+                  .LogTo(Console.WriteLine, LogLevel.Information)
+                  .EnableSensitiveDataLogging()
+                  .EnableDetailedErrors());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
 
             builder.Services.AddTransient<IUserTaskService, UserTaskService>();
             builder.Services.AddTransient<IStatusService, StatusService>();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+            using (var Scope = app.Services.CreateScope())
             {
-                
+                var context = Scope.ServiceProvider.GetRequiredService<TransferMateDbContext>();
+                context.Database.Migrate();
             }
+
+            // Configure the HTTP request pipeline.
+            if (app.Environment.IsDevelopment()) { }
 
             app.UseSwagger();
             app.UseSwaggerUI();
@@ -64,13 +74,13 @@ namespace TransferMate_TodoManager
                 return result.IsOk ? Results.Ok(result) : Results.BadRequest(result);
             });
 
-            app.MapGet("/getPendingTasks", async ( IUserTaskService service) =>
+            app.MapGet("/getPendingTasks", async (IUserTaskService service) =>
             {
                 var result = await service.GetPendingTasksAsync();
                 return result.IsOk ? Results.Ok(result) : Results.BadRequest(result);
             });
 
-            app.MapGet("/getOverdueTasks", async ( IUserTaskService service) =>
+            app.MapGet("/getOverdueTasks", async (IUserTaskService service) =>
             {
                 var result = await service.GetOverdueTasksAsync();
                 return result.IsOk ? Results.Ok(result) : Results.BadRequest(result);
@@ -81,7 +91,7 @@ namespace TransferMate_TodoManager
                 var result = await service.GetAll();
                 return result.IsOk ? Results.Ok(result) : Results.BadRequest(result);
             });
-            
+
             app.Run();
         }
     }

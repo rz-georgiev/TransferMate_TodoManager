@@ -9,6 +9,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu'
 import { OverdueTasksComponent } from "../../../features/user-tasks/components/overdue-tasks/overdue-tasks.component";
 import { PendingTasksComponent } from "../../../features/user-tasks/components/pending-tasks/pending-tasks.component";
+import { SidebarComponent } from "../../../layout/sidebar/components/sidebar/sidebar.component";
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,7 @@ import { PendingTasksComponent } from "../../../features/user-tasks/components/p
     MatIconModule,
     MatSidenavModule,
     MatListModule,
-    MatMenuModule, OverdueTasksComponent, PendingTasksComponent],
+    MatMenuModule, OverdueTasksComponent, PendingTasksComponent, SidebarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
