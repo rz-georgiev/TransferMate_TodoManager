@@ -31,7 +31,7 @@ import { Router } from '@angular/router';
     MatSelect,
     MatOption,
     MatDatepickerModule,
-    MatNativeDateModule 
+    MatNativeDateModule
   ],
   templateUrl: './task-editor.component.html',
   styleUrl: './task-editor.component.css'
@@ -64,39 +64,41 @@ export class TaskEditorComponent {
       }
     });
 
-  this.statusesService.getAll().subscribe(x => {
+    this.statusesService.getAll().subscribe(x => {
       this.statuses = x.result;
-  });
+    });
 
-    // this.isInEditMode = this.data?.id > 0;
-    // if (this.data?.id > 0) {
-      
-    // }
-    // this.editForm.patchValue({
-    //   name: this.data.name,
-    //   dueDate: this.data.dueDate,
-    // });
-    
-    // this.statusesService.getAll().subscribe(x => {
-    //   this.statuses = x.result;
-
-    //   if (this.data?.id > 0) {
-    //     this.editForm.patchValue({
-    //       statusId: this.data.statusId,
-    //     });
-    //   }
-    // });
+    if (this.data?.id > 0) {
+      this.editForm.patchValue({
+        name: this.data.name,
+        dueDate: this.data.dueDate,
+        statusId: this.data.statusId,
+      });
+    }
   }
 
   onSubmit() {
-        this.taskService.createTask({
-          name: this.editForm.value.name,
-          dueDate: this.editForm.value.dueDate
-        }).subscribe(x => {
-          if (x.isOk) {
-            this.router.navigate(['/pending-tasks']);
-          }
-        });
+    if (this.data?.id > 0) {
+      this.taskService.updateTask({
+        id: this.data.id,
+        name: this.editForm.value.name,
+        dueDate: this.editForm.value.dueDate,
+        statusId: this.editForm.value.statusId,
+      }).subscribe(x => {
+        if (x.isOk) {
+          this.router.navigate(['/pending-tasks']);
+        }
+      });
+    }
+    else {
+      this.taskService.createTask({
+        name: this.editForm.value.name,
+        dueDate: this.editForm.value.dueDate
+      }).subscribe(x => {
+        if (x.isOk) {
+          this.router.navigate(['/pending-tasks']);
+        }
+      });
+    }
   }
-
 }
