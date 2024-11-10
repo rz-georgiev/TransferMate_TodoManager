@@ -22,6 +22,7 @@ services:
       ConnectionStrings__TransferMate: Server=172.18.0.1;Port=3307;Database=tm_todo_manager;User=root;Password=TransferMate1;
     ports: 
       - 8082:80
+      - "5000:5000"
     restart: unless-stopped
     depends_on:
       - mysql
