@@ -34,11 +34,12 @@ import { BaseTasksComponent } from "../base-tasks/base-tasks.component";
     MatDatepickerModule,
     MatNativeDateModule,
     BaseTasksComponent
-],
+  ],
   templateUrl: './task-editor.component.html',
   styleUrl: './task-editor.component.css'
 })
 export class TaskEditorComponent {
+
 
   public editForm!: FormGroup;
   public data!: any;
@@ -88,13 +89,13 @@ export class TaskEditorComponent {
       this.taskService.updateTask({
         id: this.data.id,
         name: this.editForm.value.name,
-        dueDate: this.editForm.value.dueDate === '' 
-            ? null
-            : this.editForm.value.dueDate,
+        dueDate: this.editForm.value.dueDate === ''
+          ? null
+          : this.editForm.value.dueDate,
         statusId: this.editForm.value.statusId,
       }).subscribe(x => {
         if (x.isOk) {
-          if (this.isPendingTasks){
+          if (this.isPendingTasks) {
             this.router.navigate(['/pending-tasks']);
           } else {
             this.router.navigate(['/overdue-tasks']);
@@ -105,12 +106,12 @@ export class TaskEditorComponent {
     else {
       this.taskService.createTask({
         name: this.editForm.value.name,
-        dueDate: this.editForm.value.dueDate === '' 
-           ? null
-           : this.editForm.value.dueDate
+        dueDate: this.editForm.value.dueDate === ''
+          ? null
+          : this.editForm.value.dueDate
       }).subscribe(x => {
         if (x.isOk) {
-          if (this.isPendingTasks){
+          if (this.isPendingTasks) {
             this.router.navigate(['/pending-tasks']);
           } else {
             this.router.navigate(['/overdue-tasks']);

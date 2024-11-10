@@ -16,7 +16,7 @@ namespace TM_TodoManager.Application.Interfaces
             _dbContext = dbContext;
             _mapper = mapper;
         }
-
+        
         public async Task<BaseResponse<IEnumerable<ReadStatusDto>>> GetAll()
         {
             var statuses = await _dbContext.Statuses.ToListAsync();

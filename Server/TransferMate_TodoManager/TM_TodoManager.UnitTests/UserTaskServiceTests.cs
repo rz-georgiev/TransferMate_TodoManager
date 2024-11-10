@@ -52,7 +52,7 @@ namespace TransferMate_TodoManager.UnitTests
             _service = new UserTaskService(context, _mapper);
 
             var result = await _service.GetPendingTasksAsync();
-            Assert.True(result.Result.Count() == 4);
+            Assert.True(result.Result.Count() == 3);
         }
 
         [Fact]

@@ -17,17 +17,19 @@ namespace TransferMate_TodoManager
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            // Setting up AutoMapper profile
             builder.Services.AddAutoMapper(typeof(MappingProfile));
 
+            ///Configuring database connection
             var connectionString = builder.Configuration.GetConnectionString("TransferMate");
             try
             {
                 var serverVersion = new MySqlServerVersion(ServerVersion.AutoDetect(connectionString));
                 builder.Services.AddDbContext<TransferMateDbContext>(
-              dbContextOptions => dbContextOptions
+                dbContextOptions => dbContextOptions
                   .UseMySql(connectionString, serverVersion)
                   .LogTo(Console.WriteLine, LogLevel.Information)
                   .EnableSensitiveDataLogging()
@@ -53,13 +55,11 @@ namespace TransferMate_TodoManager
             });
 
             var app = builder.Build();
-
-
             app.UseCors(x => x
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader());
-            
+
             using (var Scope = app.Services.CreateScope())
             {
                 var context = Scope.ServiceProvider.GetRequiredService<TransferMateDbContext>();
@@ -71,9 +71,15 @@ namespace TransferMate_TodoManager
 
             app.UseSwagger();
             app.UseSwaggerUI();
-
             app.UseHttpsRedirection();
 
+            MapEndpoints(app);
+
+            app.Run();
+        }
+
+        public static void MapEndpoints( WebApplication app)
+        {
             app.MapPost("/createTask", async (NewTaskDto dto, IUserTaskService service) =>
             {
                 var result = await service.CreateTaskAsync(dto);
@@ -104,7 +110,6 @@ namespace TransferMate_TodoManager
                 return result.IsOk ? Results.Ok(result) : Results.BadRequest(result);
             });
 
-            app.Run();
         }
     }
 }

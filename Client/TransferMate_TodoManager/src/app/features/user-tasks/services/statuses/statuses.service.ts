@@ -14,9 +14,8 @@ export class StatusesService {
 
   constructor(private httpClient: HttpClient) { }
 
+  // Extracting all status types from the api
   getAll(): Observable<BaseResponse<ReadStatusDto[]>> {
     return this.httpClient.get<BaseResponse<ReadStatusDto[]>>(`${this.baseUrl}/statuses`);
   }
-
-
 }
