@@ -89,13 +89,13 @@ export class TaskEditorComponent {
     let selectedDate = this.editForm.value.dueDate // Assume this gets the selected date from the form
     selectedDate = new Date(selectedDate);
     const utcDate = new Date(Date.UTC(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate()));
-    const controlDate = formatDate(utcDate, 'yyyy-MM-ddTHH:mm:ss.SSSZ', 'en-US');
 
     if (this.data?.id > 0) {
       this.taskService.updateTask({
         id: this.data.id,
         name: this.editForm.value.name,
         dueDate: this.editForm.value.dueDate === ''
+         || this.editForm.value.dueDate === null
           ? null
           : utcDate,
         statusId: this.editForm.value.statusId,
@@ -114,6 +114,7 @@ export class TaskEditorComponent {
       this.taskService.createTask({
         name: this.editForm.value.name,
         dueDate: this.editForm.value.dueDate === ''
+        || this.editForm.value.dueDate === null
           ? null
           : utcDate
       }).subscribe(x => {
