@@ -1,6 +1,6 @@
 export interface UpdateTaskDto {
     id: number;
     name: number;
-    dueDate: Date;
+    dueDate: Date | null;
     statusId: number;
 }

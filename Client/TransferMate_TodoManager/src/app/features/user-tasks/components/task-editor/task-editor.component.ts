@@ -5,7 +5,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { CommonModule } from '@angular/common';
+import { CommonModule, formatDate } from '@angular/common';
 import { ActivatedRoute, Route } from '@angular/router';
 import { ReadTaskDto } from '../../models/readTaskDto';
 import { MatOption, MatSelect } from '@angular/material/select';
@@ -85,13 +85,19 @@ export class TaskEditorComponent {
   }
 
   onSubmit() {
+
+    let selectedDate = this.editForm.value.dueDate // Assume this gets the selected date from the form
+    selectedDate = new Date(selectedDate);
+    const utcDate = new Date(Date.UTC(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate()));
+    const controlDate = formatDate(utcDate, 'yyyy-MM-ddTHH:mm:ss.SSSZ', 'en-US');
+
     if (this.data?.id > 0) {
       this.taskService.updateTask({
         id: this.data.id,
         name: this.editForm.value.name,
         dueDate: this.editForm.value.dueDate === ''
           ? null
-          : this.editForm.value.dueDate,
+          : utcDate,
         statusId: this.editForm.value.statusId,
       }).subscribe(x => {
         if (x.isOk) {
@@ -104,11 +110,12 @@ export class TaskEditorComponent {
       });
     }
     else {
+      
       this.taskService.createTask({
         name: this.editForm.value.name,
         dueDate: this.editForm.value.dueDate === ''
           ? null
-          : this.editForm.value.dueDate
+          : utcDate
       }).subscribe(x => {
         if (x.isOk) {
           if (this.isPendingTasks) {

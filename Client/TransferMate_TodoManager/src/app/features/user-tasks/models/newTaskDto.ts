@@ -1,4 +1,4 @@
 export interface NewTaskDto {
     name: string;
-    dueDate: Date;
+    dueDate: Date | null;
 }

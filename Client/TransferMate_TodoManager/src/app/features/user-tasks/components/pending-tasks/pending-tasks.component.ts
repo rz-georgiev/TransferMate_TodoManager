@@ -1,17 +1,15 @@
 import { Component } from '@angular/core';
 import { ReadTaskDto } from '../../models/readTaskDto';
 import { UserTaskService } from '../../services/user-tasks/user-task.service';
-import { OnInit, ViewChild } from '@angular/core';
+import { ViewChild } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
-import { MatFormField, MatFormFieldControl, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { RouterLink, RouterModule } from '@angular/router';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { BaseTasksComponent } from "../base-tasks/base-tasks.component";
 
 @Component({
@@ -22,7 +20,6 @@ import { BaseTasksComponent } from "../base-tasks/base-tasks.component";
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatFormFieldModule,
     MatInputModule,
     MatIconModule,
     RouterLink,
