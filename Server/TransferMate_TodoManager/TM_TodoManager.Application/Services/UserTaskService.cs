@@ -67,13 +67,14 @@ namespace TM_TodoManager.Application.Interfaces
 
         public async Task<BaseResponse<IEnumerable<ReadTaskDto>>> GetPendingTasksAsync()
         {
-            var tasks = _dbContext.UserTasks.Where(x => x.DueDate < x.CreatedDateTime && x.StatusId != (int)StatusType.Done);
+            var tasks = _dbContext.UserTasks.Where(x => (x.CreatedDateTime < x.DueDate || x.DueDate == null) 
+                && x.StatusId != (int)StatusType.Done);
             return await GetTasksSummaryAsync(tasks);
         }
 
         public async Task<BaseResponse<IEnumerable<ReadTaskDto>>> GetOverdueTasksAsync()
         {
-            var tasks = _dbContext.UserTasks.Where(x => x.DueDate >= x.CreatedDateTime && x.StatusId != (int)StatusType.Done);
+            var tasks = _dbContext.UserTasks.Where(x => x.CreatedDateTime >= x.DueDate && x.StatusId != (int)StatusType.Done);
             return await GetTasksSummaryAsync(tasks);
         }
 
